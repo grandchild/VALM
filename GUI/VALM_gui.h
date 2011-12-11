@@ -43,7 +43,6 @@ public:
 	// Quitting the GUI before the main application terminates
 	virtual bool VALM_GUI_Quit();
 	
-	
 	//// Actions ////
 	
 	// Receive changes from main application

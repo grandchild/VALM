@@ -1,0 +1,69 @@
+                   +=-==-=+
+                   | VALM |
+                   +=-==-=+
+
+--- Nothing is known. Everything is tested. ---
+--- No limits unless absolutely neccessary. ---
+
+
+custom code:
+¯¯¯¯¯¯¯¯¯¯¯¯
+-vector variable support (small arrays, var = <x,y,z> )
+
+-getpxl(<x,y>) (returns colour vector <red,green,blue>)
+-getallpxl([<r,g,b>]) (returns <x,y> array)
+-getnthpxl(n,[<r,g,b>]) (returns array, every nth pixel every nth row, faster)
+-getgausspixel(density, [<r,g,b>]) (returns <r,g,b> of pixels selected by a gaussian distribution)
+
+-render: "send[1-10]" und "receive[1-10]" (send individual points/triangles to later render object (named "1"-"10"))
+-built-in movement functions (ease-in, -out, interpolate, sigmoid, hermite, newton, etc), fps-adjusted (optional?)
+
+
+UI:
+¯¯¯
+-master code controls effects colour channels
+-recompile-/re-init-button
+-checkboxes for effects tree
+-blend mode hotkeys (numpad)
+-all effects codable (enable, alpha, blend mode), "to code..." / "...or not to code" button
+-main: standard blend modes & custom (preset specific) blend modes (for speed optimization with )
+-main: "desired framerate" box
+-hover over variables shows current value in tooltip
+-hover over effect in effect tree shows that framebuffer state (maybe only in a special inspect mode or with context menu command, or just right click)
+-code highlighting
+-effects in tree have tags/colorcoding (render/trans/misc & software/hardware rendering & ...)
+
+
+VJing:
+¯¯¯¯¯¯
+-macros/quicksets
+
+
+effects:
+¯¯¯¯¯¯¯¯
+-custom blend:  c = f[a,b]; (c = (1-a)*b;)
+//-custom beat:   b = reg02; reg02 = cb;   ||obsolete -> all effects (master-)codable||
+-.swf flash renderer
+-texer: load&save image in the texer (in the preset) / preview field in editor
+
+
+features/other:
+¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+-song peak tracking (optional/daten im zip) & peaks read
+-non-realtime render mode (<sample.mp3> to .avi) -> high-res
+-compatability mode for old AVS presets (with all oddities of AVS)
+-remembers compatability mode on/off on a preset-by-preset basis
+-as vvvv plugin-dll
+-multi-instance with final(?) hardware effect- & mixer stage
+-preset library
+
+
+preset files:
+¯¯¯¯¯¯¯¯¯¯¯¯¯
+-presets stored in xml-file (backwards compatability to AVS<3.0? batch trans-coding tool?)
+-preview image(s?) included in the file (or in the library? -> choice when saving preset file, if there's no image in the preset file then the library can generate and store its own preview image)
+
+
+rendering:
+¯¯¯¯¯¯¯¯¯¯
+-overrendering (0px-Xpx border for convolution filter artifacts, flows, etc) -> preset specific
