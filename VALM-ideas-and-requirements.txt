@@ -7,7 +7,7 @@
 
 
 custom code:
-������������
+¯¯¯¯¯¯¯¯¯¯¯¯
 -vector variable support (small arrays, var = <x,y,z> )
 
 -getpxl(<x,y>) (returns colour vector <red,green,blue>)
@@ -20,7 +20,7 @@ custom code:
 
 
 UI:
-���
+¯¯¯
 -master code controls effects colour channels
 -recompile-/re-init-button
 -checkboxes for effects tree
@@ -35,12 +35,12 @@ UI:
 
 
 VJing:
-������
+¯¯¯¯¯¯
 -macros/quicksets
 
 
 effects:
-��������
+¯¯¯¯¯¯¯¯
 -custom blend:  c = f[a,b]; (c = (1-a)*b;)
 //-custom beat:   b = reg02; reg02 = cb;   ||obsolete -> all effects (master-)codable||
 -.swf flash renderer
@@ -48,7 +48,7 @@ effects:
 
 
 features/other:
-���������������
+¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
 -song peak tracking (optional/daten im zip) & peaks read
 -non-realtime render mode (<sample.mp3> to .avi) -> high-res
 -compatability mode for old AVS presets (with all oddities of AVS)
@@ -59,11 +59,11 @@ features/other:
 
 
 preset files:
-�������������
+¯¯¯¯¯¯¯¯¯¯¯¯¯
 -presets stored in xml-file (backwards compatability to AVS? batch trans-coding tool?)
 -preview image(s?) included in the file (or in the library? -> choice when saving preset file, if there's no image in the preset file then the library can generate and store its own preview image)
 
 
 rendering:
-����������
+¯¯¯¯¯¯¯¯¯¯
 -overrendering (0px-Xpx border for convolution filter artifacts, flows, etc) -> preset specific
