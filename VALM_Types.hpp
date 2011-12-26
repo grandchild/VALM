@@ -22,12 +22,12 @@ typedef struct color_struct {
  * @param Sound Components that change values in the VALM_SoundData structs for components below this component
  * @param Misc Components that have some other effect (e.g. saving/restoring framebuffers)
  */
-typedef enum VALM_ComponentType_struct {
+typedef enum VALM_EffectType_struct {
 	Render,
 	Trans,
 	Sound,
 	Misc
-} VALM_ComponentType;
+} VALM_EffectType;
 
 /**
  * Sound data for components.
@@ -36,11 +36,11 @@ typedef enum VALM_ComponentType_struct {
  * @param spectrum FFT of the sound input (4096 samples)
  * @param beat True if a beat has occurred during the last frame
  */	
-typedef struct VALM_SoundData_struct {
+typedef struct VALM_Sound_struct {
 	float oscilloscope[4096];
 	float spectrum[4096];
 	bool beat;
-} VALM_SoundData;
+} VALM_Sound;
 
 /**
  * Framebuffer structure.
@@ -50,9 +50,9 @@ typedef struct VALM_SoundData_struct {
  * @param depth Bitdepth of the image (RGBA)
  * @param flip Side of the framebuffer which is written to (0 or 1)
  */
-typedef struct VALM_FramebufferConfiguration_struct {
+typedef struct VALM_FramebufferConfig_struct {
 	unsigned short width;
 	unsigned short height;
 	unsigned char depth;
 	unsigned char flip;
-} VALM_FramebufferConfiguration;
+} VALM_FramebufferConfig;

@@ -8,59 +8,72 @@
 
 custom code:
 ¯¯¯¯¯¯¯¯¯¯¯¯
--vector variable support (small arrays, var = <x,y,z> )
+-vector variable support (small arrays, var = <x,y,z,w> )
+-- swizzles?
 
 -getpxl(<x,y>) (returns colour vector <red,green,blue>)
 -getallpxl([<r,g,b>]) (returns <x,y> array)
--getnthpxl(n,[<r,g,b>]) (returns array, every nth pixel every nth row, faster)
--getgausspixel(density, [<r,g,b>]) (returns <r,g,b> of pixels selected by a gaussian distribution)
+-getnthpxl(n,[<r,g,b>]) (returns array, every nth pixel every nth row, supposedly faster)
+-getgausspixel(density, [<r,g,b>]) (returns average <r,g,b> of w*h*density pixels selected by a gaussian(?) distribution)
 
--render: "send[1-10]" und "receive[1-10]" (send individual points/triangles to later render object (named "1"-"10"))
+-render: "send[1-$n]" und "receive[1-$n]" (send individual points/triangles to later render object (named "1"-$n))
 -built-in movement functions (ease-in, -out, interpolate, sigmoid, hermite, newton, etc), fps-adjusted (optional?)
 
 
 UI:
 ¯¯¯
--master code controls effects colour channels
+--- every component ---
+-enable-checkboxes (default 'on' or 'off' according to preferences ['off' can be useful live])
+-all effects codable (common reserved variables: "enable", "alpha", "blendmode", "channels<r,g,b>"), "to code..." / "...or not to code" button
+-colour channel pass through (no modification like switch/mix because when would that occur? before or after? -> better in a separate effect)
+
+--- only on effect collection (aka EffectList) ---
+-ui has always ONE "Root" EffectList
 -recompile-/re-init-button
--checkboxes for effects tree
--blend mode hotkeys (numpad)
--all effects codable (enable, alpha, blend mode), "to code..." / "...or not to code" button
--main: standard blend modes & custom (preset specific) blend modes (for speed optimization with )
--main: "desired framerate" box
--hover over variables shows current value in tooltip
+-"desired framerate" box
+-additional custom (collection specific) blend modes
+-"force separate thread"-button
+-reference contents from preset file
+--checkbox with browse/select field, "Load"&"Save"-buttons
+--load from/save to separate file
+--save main effectlist as preset with references, optionally as one big preset ("OBP" kills references)
+
+--- effect tree view ---
 -hover over effect in effect tree shows that framebuffer state (maybe only in a special inspect mode or with context menu command, or just right click)
--code highlighting
 -effects in tree have tags/colorcoding (render/trans/misc & software/hardware rendering & ...)
+-blend mode hotkeys (numpad)
+
+--- code ui features ---
+-code highlighting
+-hover over variables shows current value in tooltip
 
 
 VJing:
 ¯¯¯¯¯¯
--macros/quicksets
+-macros/quicksets (kind of obsolete since everything is one big preset, with different threads/preset references and all)
 
 
 effects:
 ¯¯¯¯¯¯¯¯
 -custom blend:  c = f[a,b]; (c = (1-a)*b;)
 //-custom beat:   b = reg02; reg02 = cb;   ||obsolete -> all effects (master-)codable||
--.swf flash renderer
+-.swf flash renderer (...oof!)
 -texer: load&save image in the texer (in the preset) / preview field in editor
 
 
 features/other:
 ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
--song peak tracking (optional/daten im zip) & peaks read
+-song scanning library (as separate library (zippable) or next to media files - as the user wishes per preferences)
 -non-realtime render mode (<sample.mp3> to .avi) -> high-res
--compatability mode for old AVS presets (with all oddities of AVS)
--remembers compatability mode on/off on a preset-by-preset basis
--as vvvv plugin-dll
+-compatability mode for old AVS preset files (.avs) -> with all oddities of AVS...
+-core as vvvv plugin-dll
 -multi-instance with final(?) hardware effect- & mixer stage
 -preset library
 
 
 preset files:
 ¯¯¯¯¯¯¯¯¯¯¯¯¯
--presets stored in xml-file (backwards compatability to AVS? batch trans-coding tool?)
+-presets stored in xml-file (backwards compatability to AVS? not. batch trans-coding tool? probably.)
 -preview image(s?) included in the file (or in the library? -> choice when saving preset file, if there's no image in the preset file then the library can generate and store its own preview image)
 
 

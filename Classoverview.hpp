@@ -7,7 +7,7 @@ using namespace std;
 /**
  * interface for any type of config data
  */
-class VALM_ComponentConfigData
+class VALM_EffectConfig
 {
 private:
 	list<string> strings;
@@ -28,39 +28,27 @@ public:
  * like rendering/executing the component and such, so it can be safely used by
  * the anyone.
  */
-class VALM_ComponentLight
+class VALM_Effect
 {
 private:
-	list<VALM_ComponentLight> children;
-	VALM_ComponentLight parent;
-	VALM_ComponentConfigData config;
-	VALM_ComponentType type;
+	list<VALM_Effect> children;
+	VALM_Effect parent;
+	VALM_EffectConfig config;
 	
 public:
-	VALM_ComponentLight getParent();
-	list<VALM_ComponentLight> getChild();
+	VALM_Effect getParent();
+	list<VALM_Effect> getChild();
 };
-
-/**
- * Defines the settings struct for executing a Component.
- * This is distinct from VALM_ComponentConfigData in that
- * anyone else external from the Rendering process (e.g.
- * the GUI) knows nothing about this.
- */
-typedef struct VALM_ComponentSettings_struct {
-	VALM_SoundData* sound;
-	VALM_FramebufferConfiguration* fbConf;
-} VALM_ComponentSettings;
 
 /**
  * Internal interface for any component of the tree, including the tree itself.
  * Inherits most of its fields and methods from the light interface but declares
- * executing and the settings needed for that.
+ * executing and the settings needed for executing the component.
  */
-class VALM_Component : public VALM_ComponentLight
+class VALM_CoreEffect : public VALM_Effect
 {
 private:
-	VALM_ComponentSettings* settings;
+	VALM_EffectSettings* settings;
 	
 public:
 	virtual int Execute();
