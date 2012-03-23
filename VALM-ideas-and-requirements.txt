@@ -16,7 +16,7 @@ custom code:
 -getnthpxl(n,[<r,g,b>]) (returns array, every nth pixel every nth row, supposedly faster)
 -getgausspixel(density, [<r,g,b>]) (returns average <r,g,b> of w*h*density pixels selected by a gaussian(?) distribution)
 
--render: "send[1-$n]" und "receive[1-$n]" (send individual points/triangles to later render object (named "1"-$n))
+-render: "send[1-$n]" und "receive[1-$n]" (send individual points/triangles to other render object (named "1"-$n))
 -built-in movement functions (ease-in, -out, interpolate, sigmoid, hermite, newton, etc), fps-adjusted (optional?)
 
 
@@ -30,41 +30,51 @@ UI:
 --- only on effect collection (aka EffectList) ---
 -ui has always ONE "Root" EffectList
 -recompile-/re-init-button
--"desired framerate" box
--additional custom (collection specific) blend modes
+-"desired framerate" box (with "like parent" (default) and "like root" checkboxes)
+-additional custom (EffectList-specific) blend modes
 -"force separate thread"-button
--reference contents from preset file
---checkbox with browse/select field, "Load"&"Save"-buttons
---load from/save to separate file
---save main effectlist as preset with references, optionally as one big preset ("OBP" kills references)
+-reference contents from preset file:
+---load-from/save-to separate file
+---checkbox with browse/select field, "Load"&"Save"-buttons
+---save main effectlist as preset with references, optionally as one big preset ("OBP" kills references in that file)
 
 --- effect tree view ---
 -hover over effect in effect tree shows that framebuffer state (maybe only in a special inspect mode or with context menu command, or just right click)
 -effects in tree have tags/colorcoding (render/trans/misc & software/hardware rendering & ...)
--blend mode hotkeys (numpad)
 
 --- code ui features ---
 -code highlighting
 -hover over variables shows current value in tooltip
 
+--- other features ---
+-blend mode hotkeys (numpad) [really needed?]
 
 VJing:
 ¯¯¯¯¯¯
--macros/quicksets (kind of obsolete since everything is one big preset, with different threads/preset references and all)
+-macros/quicksets [kind of obsolete since everything is one big preset, with different threads/preset references and all]
 
 
 effects:
 ¯¯¯¯¯¯¯¯
--custom blend:  c = f[a,b]; (c = (1-a)*b;)
-//-custom beat:   b = reg02; reg02 = cb;   ||obsolete -> all effects (master-)codable||
+-custom blend:  c = f[a,b]; - e.g. c = (1-a)*b; (defined in some parent EffectList)
+//-custom beat:   b = reg02; reg02 = cb;   [obsolete -> all effects (master-)codable]
 -.swf flash renderer (...oof!)
 -texer: load&save image in the texer (in the preset) / preview field in editor
+-video player effect (discard/use audio)
 
 
-features/other:
+audio features:
 ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
--song scanning library (as separate library (zippable) or next to media files - as the user wishes per preferences)
--non-realtime render mode (<sample.mp3> to .avi) -> high-res
+-scanning library (as separate library (zippable) or next to media files - as the user wishes per preferences)
+-communicate with external audio players (e.g. Winamp messages) to support song info, playtime, volume, etc...
+-own basic audioplayer functionality?
+
+
+core features:
+¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+-non-realtime render mode (<sample.mp3> to .avi)
+---arbitrary resolutions
+---options: "re-init preset", "start from current state"
 -compatability mode for old AVS preset files (.avs) -> with all oddities of AVS...
 -core as vvvv plugin-dll
 -multi-instance with final(?) hardware effect- & mixer stage
@@ -73,6 +83,12 @@ features/other:
 
 preset files:
 ¯¯¯¯¯¯¯¯¯¯¯¯¯
+-No File>Save[As] - Introducing "Cuts", marking a particular state in the undo history
+-Cut history is endless, Undo history is not.
+-Save cuts or present state as a preset file
+-Q: Should going-back-to-a-cut-and-modifiying-it append to history or introduce a branch?
+--A: Branches are messy for both program(mer) and user.
+--   Appending it to history includes no real penalty since you can still undo (within undo history boundaries)
 -presets stored in xml-file (backwards compatability to AVS? not. batch trans-coding tool? probably.)
 -preview image(s?) included in the file (or in the library? -> choice when saving preset file, if there's no image in the preset file then the library can generate and store its own preview image)
 
